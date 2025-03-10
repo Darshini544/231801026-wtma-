@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup Form</title>
+    <style>
+        /* CSS Code */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .form-container {
+            width: 50%;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+        input, textarea, button {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h1>Signup Form</h1>
+        <form id="signupForm">
+            <label>First Name:</label>
+            <input type="text" id="firstName" name="firstName" required>
+            
+            <label>Last Name:</label>
+            <input type="text" id="lastName" name="lastName" required>
+
+            <label>Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label>Date of Birth:</label>
+            <input type="date" id="dob" name="dob" required>
+
+            <label>Age:</label>
+            <input type="number" id="age" name="age" required>
+
+            <label>Gender:</label>
+            <input type="radio" id="male" name="gender" value="Male" required> Male
+            <input type="radio" id="female" name="gender" value="Female" required> Female
+
+            <label>Phone Number:</label>
+            <input type="tel" id="phone" name="phone" required>
+
+            <label>Address:</label>
+            <textarea id="address" name="address" required></textarea>
+
+            <button type="submit" id="signupBtn">Sign Up</button>
+        </form>
+        <div id="resultTable" style="display:none;">
+            <h2>Submitted Data</h2>
+            <table id="dataTable"></table>
+        </div>
+    </div>
+    <script>
+        // JavaScript Code
+        document.getElementById("signupForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const firstName = document.getElementById("firstName").value;
+            const lastName = document.getElementById("lastName").value;
+            const email = document.getElementById("email").value;
+            const dob = document.getElementById("dob").value;
+            const age = document.getElementById("age").value;
+            const gender = document.querySelector('input[name="gender"]:checked')?.value;
+            const phone = document.getElementById("phone").value;
+            const address = document.getElementById("address").value;
+
+            if (firstName.length < 4 || !/^[a-zA-Z]+$/.test(firstName)) {
+                alert("First Name should contain only alphabets and be at least 4 characters long.");
+                return;
+            }
+
+            const dataTable = document.getElementById("dataTable");
+            dataTable.innerHTML = `
+                <tr>
+                    <th>Field</th>
+                    <th>Value</th>
+                </tr>
+                <tr><td>First Name</td><td>${firstName}</td></tr>
+                <tr><td>Last Name</td><td>${lastName}</td></tr>
+                <tr><td>Email</td><td>${email}</td></tr>
+                <tr><td>Date of Birth</td><td>${dob}</td></tr>
+                <tr><td>Age</td><td>${age}</td></tr>
+                <tr><td>Gender</td><td>${gender}</td></tr>
+                <tr><td>Phone</td><td>${phone}</td></tr>
+                <tr><td>Address</td><td>${address}</td></tr>
+            `;
+            document.getElementById("resultTable").style.display = "block";
+        });
+    </script>
+</body>
+</html>
